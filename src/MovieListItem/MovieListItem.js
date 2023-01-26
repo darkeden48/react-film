@@ -1,5 +1,10 @@
-// import MovieListItem from "../MovieListItem/MovieListItem";
+import { Link } from "react-router-dom";
 
 export default function MovieListItem({ movie }) {
-  return <p>{movie.name || movie.title}</p>;
+  return (
+    <Link to={`${movie.id}`}>
+      {movie.original_name}
+      {movie.original_title}{" "}
+    </Link>
+  );
 }

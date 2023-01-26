@@ -1,31 +1,34 @@
-import { useState } from "react";
-// import NavigationBar from "./NavigationBar/NavigationBar";
-import MovieList from "./MovieList/MovieList";
-import { fetchTrendMovies, fetchSearchMovies } from "./api/apiService";
-import SearchBar from "./SearchBar/SearchBar";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import NavigationBar from "./NavigationBar/NavigationBar";
+import HomePage from "./views/HomePage";
+import MoviesPage from "./views/MoviesPage";
+import MoviesDetailsPage from "./views/MovieDetailsPage";
 
 export default function App() {
-  const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+  // useEffect(() => {
+  //   if (movies.length === 0) {
+  //     fetchTrendMovies().then((data) => {
+  //       setMovies(data.results);
+  //     });
+  //   }
+  // });
 
-  console.log(searchValue);
-  if (movies.length === 0) {
-    fetchTrendMovies().then((data) => {
-      setMovies(data.results);
-    });
-  }
-
-  const formSubmit = (e) => {
-    setSearchValue(e);
-    fetchSearchMovies(e).then((data) => {
-      setMovies(data.results);
-    });
-  };
+  // const formSubmit = (e) => {
+  //   setSearchValue(e);
+  //   fetchSearchMovies(e).then((data) => {
+  //     setMovies(data.results);
+  //   });
+  // };
 
   return (
     <>
-      <SearchBar search={searchValue} onSubmit={formSubmit} />
-      {movies !== [] && <MovieList movies={movies} />}
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/movies" element={<MoviesPage />}></Route>
+        <Route path="/movies/:movieId" element={<MoviesDetailsPage />}></Route>
+      </Routes>
     </>
   );
 }

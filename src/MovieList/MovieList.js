@@ -1,4 +1,6 @@
 import MovieListItem from "../MovieListItem/MovieListItem";
+import { fetchMovieDetails } from "../api/apiService";
+import { Link } from "react-router-dom";
 
 export default function MovieList({ movies }) {
   return (
