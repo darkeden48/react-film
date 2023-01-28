@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import MovieList from "../MovieList/MovieList";
+// import MovieList from "../MovieList/MovieList";
 import { fetchTrendMovies } from "../api/apiService";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -15,7 +16,18 @@ export default function HomePage() {
   return (
     <div>
       <h2>Trending films</h2>
-      {movies !== [] && <MovieList movies={movies} />}
+      {movies !== [] && (
+        <ul>
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <Link to={`movies/${movie.id}`}>
+                {movie.original_name}
+                {movie.original_title}{" "}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

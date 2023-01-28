@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { fetchSearchMovies } from "../api/apiService";
-import MovieList from "../MovieList/MovieList";
+// import MovieList from "../MovieList/MovieList";
 import SearchBar from "../SearchBar/SearchBar";
+import { Link } from "react-router-dom";
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
@@ -16,7 +17,18 @@ export default function MoviesPage() {
   return (
     <>
       <SearchBar search={searchValue} onSubmit={formSubmit} />
-      {movies !== [] && <MovieList movies={movies} />}
+      {movies !== [] && (
+        <ul>
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <Link to={`${movie.id}`}>
+                {movie.original_name}
+                {movie.original_title}{" "}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

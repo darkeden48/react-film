@@ -18,3 +18,15 @@ export function fetchMovieDetails(movie_id) {
     `${API_URL}/movie/${movie_id}?api_key=${API_KEY}&language=en-US`
   ).then((data) => data.json());
 }
+
+export function fetchCast(movie_id) {
+  return fetch(`${API_URL}/movie/${movie_id}/credits?api_key=${API_KEY}`).then(
+    (data) => data.json()
+  );
+}
+
+export function fetchReviews(movie_id) {
+  return fetch(`${API_URL}/movie/${movie_id}/reviews?api_key=${API_KEY}`).then(
+    (data) => data.json()
+  );
+}

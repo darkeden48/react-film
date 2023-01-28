@@ -1,11 +1,20 @@
 import { useState, useEffect } from "react";
-import MovieList from "../MovieList/MovieList";
-import { fetchTrendMovies } from "../api/apiService";
+import MovieCard from "../MovieListItem/MovieCard";
+import { fetchMovieDetails } from "../api/apiService";
+import { useParams, Outlet } from "react-router-dom";
 
 export default function MovieDetailsPage() {
+  const [movies, setMovies] = useState([]);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    fetchMovieDetails(movieId).then((data) => setMovies(data));
+  }, [movieId]);
+
   return (
     <div>
-      <h2>Film Card</h2>
+      <MovieCard film={movies} />
+      <Outlet />
     </div>
   );
 }
